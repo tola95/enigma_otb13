@@ -2,11 +2,55 @@
 #include <stdexcept>
 #include <iostream>
 #include <fstream>
+#include <boost/tokenizer.hpp>
+#include <string>
+#include <boost/foreach.hpp>
+#include <vector>
 
 using namespace std;
+using namespace boost;
+
 
 int main(int argc, char **argv)
-{
-  cout << "TODO: implement an Enigma machine" << endl;
-  return 0;
+{ 
+  std::fstream fs;
+  
+  if (argc > 1) {
+    //Open the command line argument files for reading
+    for(int i=1; i<argc; i++) {
+      if (argv[i] == NULL){
+        perror( " Error: Could not open file. \n" );
+        exit(EXIT_FAILURE);
+     }
+      fs.open("argv[i]", std::fstream::in);
+
+      //Tokenise each line of file, putting the ints into vector v
+      
+    }
+  } 
+
+  //I-O instructions on the command line
+  char c;
+  cout << "Press E to encrypt, D to decrypt: " << endl;
+  cin >> c;
+
+  if (c == 'E') {
+    cout << "Please input your message to be encrypted: " << endl;
+    std::string msg;
+    cin >> msg;
+    std::string soln;
+   // soln = Encrypt(msg); 
+    cout << soln << endl;
+  } else if (c == 'D') {
+    cout << "Please input your message to be decrypted: " << endl;
+    std::string msg;
+    cin >> msg;
+    std::string soln;
+ //   soln = Decrypt(msg); 
+    cout << soln << endl;
+  } else {
+    exit(EXIT_FAILURE);
+  } 
+  
+  
 }
