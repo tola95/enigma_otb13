@@ -9,6 +9,7 @@ const int NUMBER_OF_ALPHABETS = 26;
 std::map<char, int> p;
 std::vector<char> alphabet; 
 
+
 public:
 void initAlphabet() {
   for(int i=0; i< NUMBER_OF_ALPHABETS; i++) {
@@ -16,7 +17,7 @@ void initAlphabet() {
   }
 }
 
-void initPairing(std::vector<char>, std::vector<int>);
+void initPairing(std::vector<int> r);
 
 };
 #endif

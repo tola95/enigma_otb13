@@ -6,6 +6,7 @@
 #include <string>
 #include <boost/foreach.hpp>
 #include <vector>
+#include "Plugboard.h"
 
 using namespace std;
 using namespace boost;
@@ -13,11 +14,24 @@ using namespace boost;
 
 int main(int argc, char **argv)
 { 
+
+	//Read the contents of the first file (the plugboard), sending the ints to the vector in struct utils
+	std::fstream f;
+	std::string line;
+	ifstream pbFile("argv[1]");
+	std::vector<int> pb;
+	int num = 0;
+
+	while(std::getline(pbFile, line)) {
+		pbFile >> pb.at(num);
+
+	}
+
+
   std::fstream fs;
-  
   if (argc > 1) {
     //Open the command line argument files for reading
-    for(int i=1; i<argc; i++) {
+    for(int i=2; i<argc; i++) {
       if (argv[i] == NULL){
         perror( " Error: Could not open file. \n" );
         exit(EXIT_FAILURE);
@@ -38,9 +52,9 @@ int main(int argc, char **argv)
     cout << "Please input your message to be encrypted: " << endl;
     std::string msg;
     cin >> msg;
-    std::string soln;
-   // soln = Encrypt(msg); 
-    cout << soln << endl;
+    std::basic_string<char> soln;
+    std::basic_string<char> soln1 = Plugboard(pb, soln);
+    cout << soln1 << endl;
   } else if (c == 'D') {
     cout << "Please input your message to be decrypted: " << endl;
     std::string msg;
