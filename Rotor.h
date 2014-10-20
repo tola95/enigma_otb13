@@ -9,8 +9,8 @@ private:
 	std::vector<int> ro;
 	std::map<char, int> p;
 	int displacement;
-	Rotor previous;
-	Rotor next;
+	Rotor *previous;
+	Rotor *next;
 
 public:
 	int NUMBER_OF_ALPHABETS =26;
@@ -21,13 +21,13 @@ public:
 
 	std::string passRotor(std::string s);
 
-	Rotor getPrevious();
+	Rotor* getPrevious();
 
-	void setPrevious(Rotor r);
+	void setPrevious(Rotor *r);
 
-	Rotor getNext();
+	Rotor* getNext();
 
-	void setNext(Rotor r);
+	void setNext(Rotor *r);
 
 	int getDisplacement();
 

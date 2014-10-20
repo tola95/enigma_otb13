@@ -5,6 +5,7 @@
 #include "RotorMachine.h"
 
 
+
   RotorMachine::RotorMachine(int length, std::vector<std::vector<int>> r) {
     l = length; //Number of rotors in our machine
     ro = r;
@@ -33,3 +34,5 @@
     	  }
       }
   }
+
+

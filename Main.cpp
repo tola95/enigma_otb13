@@ -40,7 +40,7 @@ int main(int argc, char **argv)
   std::vector<std::vector<int>> vecOfRotors;
   if (argc > 1) {
     //Open the command line argument files for reading. arg[2] and afterwards will be rotors
-    for(int i=1; i<argc-1; i++) {
+    for(int i=1; i<argc-1-2; i++) {
       if (argv[i] == NULL){
         perror( " Error: Could not open file. \n" );
         exit(EXIT_FAILURE);
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
   cout << "Press E to encrypt, D to decrypt: " << endl;
   cin >> c;
   Plugboard *pboard = new Plugboard(pb);
-  Rotor *rotor = new RotorMachine(vecOfRotors);
+  RotorMachine *rotor = new RotorMachine(argc-2, vecOfRotors);
 
   if (c == 'E') {
     cout << "Please input your message to be encrypted: " << endl;

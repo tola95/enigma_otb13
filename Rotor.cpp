@@ -11,19 +11,19 @@
 	 ro = r;
  }
 
- Rotor Rotor::getPrevious() {
+ Rotor* Rotor::getPrevious() {
      return previous;
  }
 
- void Rotor::setPrevious(Rotor r) {
+ void Rotor::setPrevious(Rotor *r) {
 	 previous = r;
  }
 
- Rotor Rotor::getNext() {
+ Rotor* Rotor::getNext() {
 	 return next;
  }
 
- void Rotor::setNext(Rotor r) {
+ void Rotor::setNext(Rotor *r) {
 	 next = r;
  }
 
@@ -69,8 +69,8 @@
 
  std::map<int, char> Rotor::flippedMap() {
 	 std::map<int, char> reversed;
-	 for (std::map<int, char>::iterator i = p.begin(); i != p.end(); ++i) {
-	     reversed[i->second] = i->first;
+	 for (int i=0; i<26; i++) {
+	     reversed.find(i)->second = p.find(i)->first;
 	 }
 	 return reversed;
  }
