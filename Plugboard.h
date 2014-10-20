@@ -1,11 +1,18 @@
 #ifndef PLUGBOARD_H
 #define PLUGBOARD_H
+#include <map>
+#include <vector>
 
 class Plugboard {
+private:
+	std::vector<int> pb;
+	std::map<int, int> p;
 
 public:
- void initPairing(std::vector<int> pb);
+	Plugboard(std::vector<int> pBoard);
 
- std::string Plugboard(std::vector<int> pb, const std::string &c);
+ void initPairing();
+
+ std::string printPlugboard( const std::string &c);
 };
 #endif

@@ -2,44 +2,60 @@
 #include <stdexcept>
 #include <iostream>
 #include <fstream>
-#include <boost/tokenizer.hpp>
 #include <string>
-#include <boost/foreach.hpp>
+#include <string.h>
 #include <vector>
 #include "Plugboard.h"
+#include "Rotor.h"
+#include "RotorMachine.h"
 
 using namespace std;
-using namespace boost;
+
 
 
 int main(int argc, char **argv)
 { 
 
-	//Read the contents of the first file (the plugboard), sending the ints to the vector in struct utils
+	//Read the contents of the first file (the plugboard) and put in a vector
 	std::fstream f;
-	std::string line;
-	ifstream pbFile("argv[1]");
+	char * line = (char*) malloc(26*sizeof(int));
+	ifstream pbFile("argv[argc-1]");
 	std::vector<int> pb;
 	int num = 0;
 
-	while(std::getline(pbFile, line)) {
-		pbFile >> pb.at(num);
+	f.open("argv[argc - 1]", std::fstream::in);
 
-	}
+	pbFile >> line;
+
+	char * ch;
+	ch = strtok(line, " ");
+	while (ch != NULL){
+	  pb.push_back(atoi(ch));
+	  printf ("%s\n", ch);
+	  ch = strtok (NULL, "");
+    }
 
 
   std::fstream fs;
+  std::vector<std::vector<int>> vecOfRotors;
   if (argc > 1) {
-    //Open the command line argument files for reading
-    for(int i=2; i<argc; i++) {
+    //Open the command line argument files for reading. arg[2] and afterwards will be rotors
+    for(int i=1; i<argc-1; i++) {
       if (argv[i] == NULL){
         perror( " Error: Could not open file. \n" );
         exit(EXIT_FAILURE);
      }
       fs.open("argv[i]", std::fstream::in);
-
-      //Tokenise each line of file, putting the ints into vector v
+      ifstream rFile("argv[i]");
       
+      rFile >> line;
+
+      ch = strtok(line, " ");
+      while (ch !=NULL) {
+    	  vecOfRotors.at(i-1).push_back(atoi(ch));
+    	  printf ("%s\n", ch);
+    	  ch = strtok (NULL, "");
+      }
     }
   } 
 
@@ -47,13 +63,15 @@ int main(int argc, char **argv)
   char c;
   cout << "Press E to encrypt, D to decrypt: " << endl;
   cin >> c;
+  Plugboard *pboard = new Plugboard(pb);
+  Rotor *rotor = new RotorMachine(vecOfRotors);
 
   if (c == 'E') {
     cout << "Please input your message to be encrypted: " << endl;
     std::string msg;
     cin >> msg;
-    std::basic_string<char> soln;
-    std::basic_string<char> soln1 = Plugboard(pb, soln);
+    std::string soln;
+    std::string soln1 = pboard->printPlugboard(soln);
     cout << soln1 << endl;
   } else if (c == 'D') {
     cout << "Please input your message to be decrypted: " << endl;
@@ -66,5 +84,6 @@ int main(int argc, char **argv)
     exit(EXIT_FAILURE);
   } 
   
+  free(line);
   
 }
