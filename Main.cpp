@@ -5,74 +5,57 @@
 #include <string>
 #include <string.h>
 #include <vector>
+#include <sstream>
 #include "Plugboard.h"
 #include "Rotor.h"
 #include "RotorMachine.h"
 
 using namespace std;
 
-
-
 int main(int argc, char **argv)
 { 
+    int noOfRotors = argc-2;
 
-	//Read the contents of the first file (the plugboard) and put in a vector
-	std::fstream f;
-	char * line = (char*) malloc(26*sizeof(int));
-	ifstream pbFile("argv[argc-1]");
+	//Read the contents of the last file (the plugboard) and put in a vector
+	std::ifstream f;
 	std::vector<int> pb;
-	int num = 0;
+	f.open(argv[argc - 1]);
+	int x;
+	while(f >> x >> std::ws) {
+	    pb.push_back(x);
+	    printf("%i\n", x);
+	}
 
-	f.open("argv[argc - 1]", std::fstream::in);
-
-	pbFile >> line;
-
-	char * ch;
-	ch = strtok(line, " ");
-	while (ch != NULL){
-	  pb.push_back(atoi(ch));
-	  printf ("%s\n", ch);
-	  ch = strtok (NULL, "");
-    }
-
-
-  std::fstream fs;
   std::vector<std::vector<int>> vecOfRotors;
-  if (argc > 1) {
-    //Open the command line argument files for reading. arg[2] and afterwards will be rotors
-    for(int i=1; i<argc-1-2; i++) {
-      if (argv[i] == NULL){
-        perror( " Error: Could not open file. \n" );
-        exit(EXIT_FAILURE);
-     }
-      fs.open("argv[i]", std::fstream::in);
-      ifstream rFile("argv[i]");
-      
-      rFile >> line;
+  vecOfRotors.resize(noOfRotors);
+  if (argc > 2) {
+  //Read the contents of the rotors and put them in the vector of vectors of ints
 
-      ch = strtok(line, " ");
-      while (ch !=NULL) {
-    	  vecOfRotors.at(i-1).push_back(atoi(ch));
-    	  printf ("%s\n", ch);
-    	  ch = strtok (NULL, "");
-      }
-    }
-  } 
+	for (int i=1; i< argc - 1; i++) {
+		std::ifstream fs;
+		fs.open(argv[i]);
+		int y;
+		while(fs >> y >> std::ws) {
+			vecOfRotors[i-1].push_back(y);
+			printf("%i ", y);
+		}
+	}
+	printf("\n");
+  }
 
   //I-O instructions on the command line
   char c;
   cout << "Press E to encrypt, D to decrypt: " << endl;
   cin >> c;
   Plugboard *pboard = new Plugboard(pb);
-  RotorMachine *rotor = new RotorMachine(argc-2, vecOfRotors);
+  //RotorMachine *rotor = new RotorMachine(noOfRotors, vecOfRotors);
 
   if (c == 'E') {
     cout << "Please input your message to be encrypted: " << endl;
     std::string msg;
     cin >> msg;
-    std::string soln;
-    std::string soln1 = pboard->printPlugboard(soln);
-    cout << soln1 << endl;
+    std::string soln = pboard->printPlugboard(msg);
+    cout << soln << endl;
   } else if (c == 'D') {
     cout << "Please input your message to be decrypted: " << endl;
     std::string msg;
@@ -84,6 +67,5 @@ int main(int argc, char **argv)
     exit(EXIT_FAILURE);
   } 
   
-  free(line);
-  
+  return 1;
 }

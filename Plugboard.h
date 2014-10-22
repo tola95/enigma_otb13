@@ -9,7 +9,7 @@ private:
 	std::map<int, int> p;
 
 public:
-	Plugboard(std::vector<int> pBoard);
+	Plugboard(std::vector<int>& pBoard);
 
  void initPairing();
 

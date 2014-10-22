@@ -17,9 +17,9 @@ public:
 
 	void initMap();
 
-	Rotor(std::vector<int> r);
+	Rotor(std::vector<int>& r);
 
-	std::string passRotor(std::string s);
+	std::string passRotor(std::string& s);
 
 	Rotor* getPrevious();
 
@@ -35,7 +35,7 @@ public:
 
     std::map<char, int> getMap();
 
-    std::string passRotorBack(std::string s);
+    std::string passRotorBack(std::string& s);
 
     std::map<int, char> flippedMap();
 

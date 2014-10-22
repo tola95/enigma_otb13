@@ -5,7 +5,7 @@
 #include "Rotor.h"
 
 
- Rotor::Rotor(std::vector<int> r) {
+ Rotor::Rotor(std::vector<int>& r) {
      initMap();
 	 setDisplacement(0);
 	 ro = r;
@@ -41,7 +41,7 @@
 	 displacement = i;
  }
 
- std::string Rotor::passRotor(std::string s) {
+ std::string Rotor::passRotor(std::string& s) {
      std::string copy;
      int strlen = s.length()/sizeof(char);
      for(int i=0; i<strlen; i++) {
@@ -56,7 +56,7 @@
 	 return p;
  }
 
- std::string Rotor::passRotorBack(std::string s){
+ std::string Rotor::passRotorBack(std::string& s){
 	 std::map<int, char> reversed = flippedMap();
 	 std::string copy;
 	 int strlen = s.length()/sizeof(char);

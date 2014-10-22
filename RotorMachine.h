@@ -12,7 +12,7 @@ private:
 	std::vector<std::vector<int>> ro;
 
 public:
-	RotorMachine(int length, std::vector<std::vector<int>> r);
+	RotorMachine(int length, std::vector<std::vector<int>>& r);
 
 	void MakeLinks();
 

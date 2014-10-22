@@ -1,12 +1,12 @@
 #include "Plugboard.h"
 #include <vector>
 
-    Plugboard::Plugboard(std::vector<int> pBoard) {
+    Plugboard::Plugboard(std::vector<int>& pBoard) {
     	pb = pBoard;
     }
 
     void Plugboard::initPairing() {
-    	int length = pb.size()/sizeof(char);
+    	int length = pb.size()/sizeof(int);
     	for(int i=0; i<length; i+2) {
     		p.insert(std::make_pair(pb.at(i), pb.at(i+1)));
     	}
