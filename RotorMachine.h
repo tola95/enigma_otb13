@@ -17,5 +17,7 @@ public:
 	void MakeLinks();
 
 	void CheckDisplacement();
+
+//	std::string passRotors(std::string s);
 };
 #endif

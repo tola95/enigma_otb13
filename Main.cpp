@@ -48,14 +48,14 @@ int main(int argc, char **argv)
   cout << "Press E to encrypt, D to decrypt: " << endl;
   cin >> c;
   Plugboard *pboard = new Plugboard(pb);
-  //RotorMachine *rotor = new RotorMachine(noOfRotors, vecOfRotors);
+  RotorMachine *rotorM = new RotorMachine(noOfRotors, vecOfRotors);
 
   if (c == 'E') {
     cout << "Please input your message to be encrypted: " << endl;
     std::string msg;
     cin >> msg;
     std::string soln = pboard->printPlugboard(msg);
-    cout << soln << endl;
+    cout << msg << endl;
   } else if (c == 'D') {
     cout << "Please input your message to be decrypted: " << endl;
     std::string msg;
