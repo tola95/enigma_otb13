@@ -17,6 +17,8 @@ public:
 
 	void initMap();
 
+        void copy(char c);
+
 	Rotor(std::vector<int>& r);
 
 	std::string passRotor(std::string& s);

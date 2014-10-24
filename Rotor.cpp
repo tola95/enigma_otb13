@@ -3,12 +3,15 @@
 #include <fstream>
 #include <string>
 #include "Rotor.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 
  Rotor::Rotor(std::vector<int>& r) {
+	 printf("5");
+	 ro = r;
      initMap();
 	 setDisplacement(0);
-	 ro = r;
+	 printf("Rotor initialised");
  }
 
  Rotor* Rotor::getPrevious() {
@@ -29,8 +32,10 @@
 
  void Rotor::initMap(){
 	 for(int i=0; i<26; i++) {
-	     p.insert(std::make_pair((char)(i + 255), ro.at(i)));
+	     p.insert(std::make_pair((char)(i + 'A'), ro.at(i)));
 	 }
+	 printf("B is mapped to ");
+	 std::cout << p.find('B')->second << std::endl;
  }
 
  int Rotor::getDisplacement() {
@@ -41,14 +46,25 @@
 	 displacement = i;
  }
 
+
  std::string Rotor::passRotor(std::string& s) {
      std::string copy;
-     int strlen = s.length()/sizeof(char);
-     for(int i=0; i<strlen; i++) {
-    	 copy[i] = (char) (p.find(((int) copy[i] - 255)
-    	           + getDisplacement())->second - getDisplacement());
+     copy.resize(s.length());
+
+     for(int i=0; i<s.length(); i++) {
+
+    	 int newc = (s[i] + getDisplacement());
+    	 if (newc > 'Z') {
+    		 newc = (newc % 'Z') + 'A';
+    	 }
+    	 int value = (p.at((newc)) - getDisplacement() ) + 'A';
+    	 if (value < 65) {
+    		 value = 90 - ('A' - value) ;
+    	 }
+    	 copy[i] = value;
      }
      displacement++;
+     std::cout << copy << std::endl;
      return copy;
  }
 
@@ -59,10 +75,16 @@
  std::string Rotor::passRotorBack(std::string& s){
 	 std::map<int, char> reversed = flippedMap();
 	 std::string copy;
-	 int strlen = s.length()/sizeof(char);
-	 for(int i=0; i<strlen; i++) {
-		 copy[i] = (char) (reversed.find(((int) copy[i] - 255)
-				   - getDisplacement())->second + getDisplacement());
+	 copy.resize(s.length());
+	 for(int i=0; i<s.length(); i++) {
+
+    	 int newc = (s[i] + getDisplacement()) - 'A';
+    	 if (newc > 'Z' - 'A') {
+    		 newc = (newc % 'Z' - 'A') ;
+    	 }
+    	 int value = reversed.find(newc)->second - getDisplacement();
+    	 value = (value + 'Z' -'A') % ('Z' - 'A');
+    	 copy[i] = value + 'A';
 	 }
 	 return copy;
  }
@@ -70,7 +92,7 @@
  std::map<int, char> Rotor::flippedMap() {
 	 std::map<int, char> reversed;
 	 for (int i=0; i<26; i++) {
-	     reversed.find(i)->second = p.find(i)->first;
+	     reversed.insert(std::make_pair(p.find('A'+ i)->second ,p.find('A'+ i)->first)) ;
 	 }
 	 return reversed;
  }

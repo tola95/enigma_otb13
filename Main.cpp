@@ -9,6 +9,7 @@
 #include "Plugboard.h"
 #include "Rotor.h"
 #include "RotorMachine.h"
+#include "Reflector.h"
 
 using namespace std;
 
@@ -23,21 +24,19 @@ int main(int argc, char **argv)
 	int x;
 	while(f >> x >> std::ws) {
 	    pb.push_back(x);
-	    printf("%i\n", x);
 	}
 
   std::vector<std::vector<int>> vecOfRotors;
   vecOfRotors.resize(noOfRotors);
   if (argc > 2) {
   //Read the contents of the rotors and put them in the vector of vectors of ints
-
+    printf("vecOfRotors");
 	for (int i=1; i< argc - 1; i++) {
 		std::ifstream fs;
 		fs.open(argv[i]);
 		int y;
 		while(fs >> y >> std::ws) {
 			vecOfRotors[i-1].push_back(y);
-			printf("%i ", y);
 		}
 	}
 	printf("\n");
@@ -54,8 +53,8 @@ int main(int argc, char **argv)
     cout << "Please input your message to be encrypted: " << endl;
     std::string msg;
     cin >> msg;
-    std::string soln = pboard->printPlugboard(msg);
-    cout << msg << endl;
+    std::string soln = pboard->printPlugboard(rotorM->passRotorsBack(Reflection(rotorM->passRotors(pboard->printPlugboard(msg)))));
+    cout << soln << endl;
   } else if (c == 'D') {
     cout << "Please input your message to be decrypted: " << endl;
     std::string msg;

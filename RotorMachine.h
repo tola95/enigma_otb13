@@ -18,6 +18,8 @@ public:
 
 	void CheckDisplacement();
 
-//	std::string passRotors(std::string s);
+	std::string passRotors(std::string s);
+
+	std::string passRotorsBack(std::string s);
 };
 #endif

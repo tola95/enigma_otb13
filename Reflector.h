@@ -1,6 +1,7 @@
 #ifndef REFLECTOR_H
 #define REFLECTOR_H
+#include <string>
 
-char Reflection(char* c);
+std::string Reflection(std::string c);
 
 #endif
