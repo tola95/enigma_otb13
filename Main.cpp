@@ -29,17 +29,17 @@ int main(int argc, char **argv)
     //(the plugboard) and put in a vector
 	std::ifstream f;
 	std::vector<int> pb;
+
 	f.open(argv[argc - 1]);
 	int x;
 	while(f >> x >> std::ws) {
 	    pb.push_back(x);
 	}
-
+    std::cout << "Here1\n" << std::endl; 
 	//Read the contents of the rotors and
 	//put them in the vector of vectors of ints
   std::vector<std::vector<int>> vecOfRotors;
   vecOfRotors.resize(noOfRotors);
-  if (argc > 2) {
 	for (int i=1; i< argc - 1; i++) {
 		std::ifstream fs;
 		fs.open(argv[i]);
@@ -47,9 +47,8 @@ int main(int argc, char **argv)
 		while(fs >> y >> std::ws) {
 			vecOfRotors[i-1].push_back(y);
 		}
-	}
   }
-
+  std::cout << "Here2\n" << std::endl;
   //I-O instructions on the command line
   Plugboard *pboard = new Plugboard(pb);
   RotorMachine *rotorM

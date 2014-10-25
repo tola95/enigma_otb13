@@ -37,7 +37,7 @@ Rotor* Rotor::getPrevious() {
 
  //Returns current displacement of rotor
  int Rotor::getDisplacement() {
-	 return displacement % 26;
+	 return displacement % 25;
  }
 
  //Sets current displacement of rotor

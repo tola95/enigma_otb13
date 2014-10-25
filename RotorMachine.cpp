@@ -26,14 +26,18 @@
         rotors[i].setNext(&rotors[i+1]);
       }
 
-      rotors[l-1].setNext(NULL);
+      
 
       for (int i = l-1; i > 0; ++i)
       {
         rotors[i].setPrevious(&rotors[i-1]);
       }
 
-      rotors[0].setPrevious(NULL);
+      if (l>0) {
+         rotors[l-1].setNext(NULL);
+         rotors[0].setPrevious(NULL);
+      }
+      
 
   }
 
@@ -47,9 +51,6 @@
   }
 
   std::string RotorMachine::passRotors(std::string s) {
-    if (l == 0) {
-      return s;
-    } else {
 	    std::string str;
 	    CheckDisplacement();
       //Rotate(s);
@@ -58,13 +59,11 @@
     	    s = str;
         }
         return s;
-    }
+    
   }
 
   std::string RotorMachine::passRotorsBack(std::string s) {
-    if (l == 0) {
-      return s;
-    } else {
+    
 	    std::string str;
 	    CheckDisplacement();
 	    for (int i=l-1; i>=0; i--) {
@@ -73,7 +72,7 @@
 	    }
 
 	    return s;
-    }
+    
   }
 /*
   void Rotate(std::string s) {
