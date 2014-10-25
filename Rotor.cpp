@@ -67,7 +67,6 @@ Rotor* Rotor::getPrevious() {
      } else if (getPrevious()->getDisplacement() == 25) {
          displacement++;
      } 
-     
      return copy;
  }
 
@@ -84,8 +83,8 @@ Rotor* Rotor::getPrevious() {
     		 newc = (newc % 'Z' - 'A') ;
     	 }
     	 int value = reversed.find(newc)->second - getDisplacement();
-    	 value = (value + 'Z' -'A') % ('Z' - 'A');
-    	 copy[i] = value + 'A';
+ //   	 value = (value + 'Z' -'A') % ('Z' - 'A');
+    	 copy[i] = value ;
 	 }
 	 return copy;
  }

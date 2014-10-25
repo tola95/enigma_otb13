@@ -1,6 +1,6 @@
 #include "Reflector.h"
 #include <string>
-
+#include <iostream>
 
 std::string Reflection(std::string s) {
   std::string copy;

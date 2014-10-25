@@ -26,10 +26,14 @@
         rotors[i].setNext(&rotors[i+1]);
       }
 
+      rotors[l-1].setNext(NULL);
+
       for (int i = l-1; i > 0; ++i)
       {
         rotors[i].setPrevious(&rotors[i-1]);
       }
+
+      rotors[0].setPrevious(NULL);
 
   }
 
