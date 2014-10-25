@@ -7,29 +7,28 @@
 #include <stdio.h>
 
  Rotor::Rotor(std::vector<int>& r) {
-	 printf("5");
 	 ro = r;
      initMap();
 	 setDisplacement(0);
-	 printf("Rotor initialised");
  }
 
- Rotor* Rotor::getPrevious() {
+Rotor* Rotor::getPrevious() {
      return previous;
  }
 
  void Rotor::setPrevious(Rotor *r) {
-	 previous = r;
+     previous = r;
  }
 
  Rotor* Rotor::getNext() {
-	 return next;
+     return next;
  }
 
  void Rotor::setNext(Rotor *r) {
-	 next = r;
+     next = r;
  }
 
+ //Initialise Rotor mapping
  void Rotor::initMap(){
 	 for(int i=0; i<26; i++) {
 	     p.insert(std::make_pair((char)(i + 'A'), ro.at(i)));
@@ -38,15 +37,17 @@
 	 std::cout << p.find('B')->second << std::endl;
  }
 
+ //Returns current displacement of rotor
  int Rotor::getDisplacement() {
 	 return displacement % 26;
  }
 
+ //Sets current displacement of rotor
  void Rotor::setDisplacement(int i) {
 	 displacement = i;
  }
 
-
+ //Returns string after it has been processed by the rotor
  std::string Rotor::passRotor(std::string& s) {
      std::string copy;
      copy.resize(s.length());
@@ -63,15 +64,18 @@
     	 }
     	 copy[i] = value;
      }
-     displacement++;
+     if (getPrevious() == NULL) {
+         displacement++;
+     } else if (getPrevious()->getDisplacement() == 25) {
+         displacement++;
+     } 
+     
      std::cout << copy << std::endl;
      return copy;
  }
 
- std::map<char, int> Rotor::getMap() {
-	 return p;
- }
-
+ //Returns string after it has been processed
+ //by the rotor in the opposite direction
  std::string Rotor::passRotorBack(std::string& s){
 	 std::map<int, char> reversed = flippedMap();
 	 std::string copy;
@@ -89,15 +93,20 @@
 	 return copy;
  }
 
+ //Returns the map of the current rotor, with keys and values flipped
  std::map<int, char> Rotor::flippedMap() {
 	 std::map<int, char> reversed;
 	 for (int i=0; i<26; i++) {
-	     reversed.insert(std::make_pair(p.find('A'+ i)->second ,p.find('A'+ i)->first)) ;
+	     reversed.insert(std::make_pair(
+	    		 p.find('A'+ i)->second ,
+	             p.find('A'+ i)->first
+	     ));
 	 }
 	 return reversed;
  }
 
  //void Rotate() {
+
 
  //}
 

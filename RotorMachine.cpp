@@ -16,27 +16,36 @@
 
   void RotorMachine::MakeLinks() {
 
-	  std::cout << ro[0].size() << std::endl;
 	    for (int i=0; i<l; i++) {
 	    	Rotor *rt = new Rotor(ro[i]);
 	  		rotors.push_back(*rt);
 	  	}
+
+      for (int i = 0; i < l-1; ++i)
+      {
+        rotors[i].setNext(&rotors[i+1]);
+      }
+
+      for (int i = l-1; i > 0; ++i)
+      {
+        rotors[i].setPrevious(&rotors[i-1]);
+      }
+
   }
 
   void RotorMachine::CheckDisplacement() {
-	  printf("1\n");
       for (int i=0; i<l-1; i++) {
 
     	  if(rotors.at(i).getDisplacement() == 0) {
                rotors[i+1].setDisplacement(rotors[i+1].getDisplacement()+1);
     	  }
       }
-      printf("2\n");
   }
 
   std::string RotorMachine::passRotors(std::string s) {
 	  std::string str;
 	  CheckDisplacement();
+    //Rotate(s);
       for (int i=0; i<l; i++) {
     	  str = rotors[i].passRotor(s);
     	  s = str;
@@ -54,5 +63,12 @@
 
 	  return s;
   }
-
+/*
+  void Rotate(std::string s) {
+    for (int i = 0; i < s.length(); ++i)
+    {
+      rotors[s.length() / 26].setDisplacement()
+    }
+  }
+*/
 

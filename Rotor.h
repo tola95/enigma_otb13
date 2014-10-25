@@ -5,7 +5,6 @@
 
 class Rotor {
 private:
-	//std::vector<std::vector<int>> rotors;
 	std::vector<int> ro;
 	std::map<char, int> p;
 	int displacement;
@@ -21,8 +20,6 @@ public:
 
 	Rotor(std::vector<int>& r);
 
-	std::string passRotor(std::string& s);
-
 	Rotor* getPrevious();
 
 	void setPrevious(Rotor *r);
@@ -31,11 +28,12 @@ public:
 
 	void setNext(Rotor *r);
 
+
+	std::string passRotor(std::string& s);
+
 	int getDisplacement();
 
     void setDisplacement(int i);
-
-    std::map<char, int> getMap();
 
     std::string passRotorBack(std::string& s);
 
