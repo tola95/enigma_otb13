@@ -18,20 +18,23 @@
 
     //Returns the string when passed through the plugboard
 	std::string Plugboard::printPlugboard(const std::string &c) {
-		initPairing();
-        int length = c.length();
-        std::string copy;
-        copy.resize(length);
-        for (int i=0; i<length; i++) {
-        	if (p.find(((int) c[i]) - 'A' ) == p.end()) {
-        		copy[i] = c[i];
+        if (c.length() == 0) {
+            return c;
+        } else {
+		  initPairing();
+          int length = c.length();
+          std::string copy;
+          copy.resize(length);
+          for (int i=0; i<length; i++) {
+          	if (p.find(((int) c[i]) - 'A' ) == p.end()) {
+           		copy[i] = c[i];
         	} else {
         		copy[i] = (char) ((p.find((int)(c[i] - 'A'))->second) + 'A');
         	}
+          }
+          return copy;
+  
         }
-         return copy;
-
-
 	}
 
 

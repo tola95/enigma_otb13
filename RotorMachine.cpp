@@ -43,25 +43,33 @@
   }
 
   std::string RotorMachine::passRotors(std::string s) {
-	  std::string str;
-	  CheckDisplacement();
-    //Rotate(s);
-      for (int i=0; i<l; i++) {
-    	  str = rotors[i].passRotor(s);
-    	  s = str;
-      }
+    if (l == 0) {
       return s;
+    } else {
+	    std::string str;
+	    CheckDisplacement();
+      //Rotate(s);
+        for (int i=0; i<l; i++) {
+    	    str = rotors[i].passRotor(s);
+    	    s = str;
+        }
+        return s;
+    }
   }
 
   std::string RotorMachine::passRotorsBack(std::string s) {
-	  std::string str;
-	  CheckDisplacement();
-	  for (int i=l-1; i>=0; i--) {
-	      str = rotors[i].passRotorBack(s);
-	      s = str;
-	  }
+    if (l == 0) {
+      return s;
+    } else {
+	    std::string str;
+	    CheckDisplacement();
+	    for (int i=l-1; i>=0; i--) {
+	        str = rotors[i].passRotorBack(s);
+	        s = str;
+	    }
 
-	  return s;
+	    return s;
+    }
   }
 /*
   void Rotate(std::string s) {

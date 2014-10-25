@@ -33,8 +33,6 @@ Rotor* Rotor::getPrevious() {
 	 for(int i=0; i<26; i++) {
 	     p.insert(std::make_pair((char)(i + 'A'), ro.at(i)));
 	 }
-	 printf("B is mapped to ");
-	 std::cout << p.find('B')->second << std::endl;
  }
 
  //Returns current displacement of rotor
@@ -70,7 +68,6 @@ Rotor* Rotor::getPrevious() {
          displacement++;
      } 
      
-     std::cout << copy << std::endl;
      return copy;
  }
 
