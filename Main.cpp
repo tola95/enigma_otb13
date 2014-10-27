@@ -15,6 +15,8 @@ using namespace std;
 std::string Encrypt(const std::string& msg, 
 	                Plugboard* pboard, 
 	                   RotorMachine* rotorM) {
+
+
 	return pboard->printPlugboard(
 		rotorM->passRotorsBack(
 			Reflection(rotorM->passRotors(
@@ -31,11 +33,17 @@ int main(int argc, char **argv)
 	std::vector<int> pb;
 
 	f.open(argv[argc - 1]);
-	int x;
-	while(f >> x >> std::ws) {
-	    pb.push_back(x);
+
+	if (f.is_open() ) {
+		int x;
+		while(f >> x >> std::ws) {
+			pb.push_back(x);
+		}
+	} else {
+		std::cout << "File does not exist" ;
 	}
-    std::cout << "Here1\n" << std::endl; 
+
+
 	//Read the contents of the rotors and
 	//put them in the vector of vectors of ints
   std::vector<std::vector<int>> vecOfRotors;
@@ -48,7 +56,6 @@ int main(int argc, char **argv)
 			vecOfRotors[i-1].push_back(y);
 		}
   }
-  std::cout << "Here2\n" << std::endl;
   //I-O instructions on the command line
   Plugboard *pboard = new Plugboard(pb);
   RotorMachine *rotorM
@@ -59,5 +66,5 @@ int main(int argc, char **argv)
     cout << soln << endl;
   
 
-  return 1;
+  return 0;
 }

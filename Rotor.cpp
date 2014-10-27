@@ -37,7 +37,7 @@ Rotor* Rotor::getPrevious() {
 
  //Returns current displacement of rotor
  int Rotor::getDisplacement() {
-	 return displacement % 25;
+	 return displacement % 26;
  }
 
  //Sets current displacement of rotor
@@ -52,21 +52,18 @@ Rotor* Rotor::getPrevious() {
 
      for(int i=0; i<s.length(); i++) {
 
-    	 int newc = (s[i] + getDisplacement());
-    	 if (newc > 'Z') {
-    		 newc = (newc % 'Z') + 'A';
+    	 int newc = ((s[i] - 'A') + getDisplacement());
+    	 if (newc >= 26) {
+    		 newc = (newc % 26);
     	 }
-    	 int value = (p.at((newc)) - getDisplacement() ) + 'A';
-    	 if (value < 65) {
-    		 value = 90 - ('A' - value) ;
-    	 }
+    	 int value = (((p.at((newc + 'A')) - getDisplacement() ) + 26) % 26) + 'A';
+    	 //if (value < 65) {
+    	 //	 value = 90 - ('A' - value) ;
+    	 //}
+    	 std::cout << value << std::endl;
     	 copy[i] = value;
      }
-     if (getPrevious() == NULL) {
-         displacement++;
-     } else if (getPrevious()->getDisplacement() == 25) {
-         displacement++;
-     } 
+
      return copy;
  }
 
@@ -77,15 +74,20 @@ Rotor* Rotor::getPrevious() {
 	 std::string copy;
 	 copy.resize(s.length());
 	 for(int i=0; i<s.length(); i++) {
+		 //std::cout << s[i] << std::endl;
+		 //printf("Gives\n");
 
     	 int newc = (s[i] + getDisplacement()) - 'A';
-    	 if (newc > 'Z' - 'A') {
-    		 newc = (newc % 'Z' - 'A') ;
+    	 if (newc >= 26) {
+    		 newc = (newc % (26)) ;
     	 }
-    	 int value = reversed.find(newc)->second - getDisplacement();
- //   	 value = (value + 'Z' -'A') % ('Z' - 'A');
+    	 int value = (reversed.find(newc)->second - 'A') - getDisplacement();
+    	 value = ((value + 26) % (26)) + 'A';
     	 copy[i] = value ;
+
+    	 std::cout << copy[i] << std::endl;
 	 }
+
 	 return copy;
  }
 
@@ -101,8 +103,8 @@ Rotor* Rotor::getPrevious() {
 	 return reversed;
  }
 
- //void Rotate() {
-
-
- //}
+ void Rotor::Rotate() {
+   displacement++;
+   displacement %= 26;
+ }
 

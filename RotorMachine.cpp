@@ -20,7 +20,7 @@
 	    	Rotor *rt = new Rotor(ro[i]);
 	  		rotors.push_back(*rt);
 	  	}
-
+/*
       for (int i = 0; i < l-1; ++i)
       {
         rotors[i].setNext(&rotors[i+1]);
@@ -37,7 +37,7 @@
          rotors[l-1].setNext(NULL);
          rotors[0].setPrevious(NULL);
       }
-      
+ */
 
   }
 
@@ -69,17 +69,24 @@
 	    for (int i=l-1; i>=0; i--) {
 	        str = rotors[i].passRotorBack(s);
 	        s = str;
+	        RotorMachine::Rotate();
 	    }
 
 	    return s;
     
   }
-/*
-  void Rotate(std::string s) {
-    for (int i = 0; i < s.length(); ++i)
+
+  void RotorMachine::Rotate() {
+    for (int i = 0; i < l; ++i)
     {
-      rotors[s.length() / 26].setDisplacement()
+      if (i == 0) {
+    	  rotors[i].Rotate();
+      } else if (rotors[i-1].getDisplacement() == 0) {
+    	  rotors[i].Rotate();
+      } else {
+    	  return ;
+      }
     }
   }
-*/
+
 

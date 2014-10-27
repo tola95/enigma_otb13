@@ -39,7 +39,7 @@ public:
 
     std::map<int, char> flippedMap();
 
-    //void Rotate();
+    void Rotate();
 };
 
 #endif

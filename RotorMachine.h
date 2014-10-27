@@ -21,5 +21,7 @@ public:
 	std::string passRotors(std::string s);
 
 	std::string passRotorsBack(std::string s);
+
+	void Rotate();
 };
 #endif
