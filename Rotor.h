@@ -16,18 +16,9 @@ public:
 
 	void initMap();
 
-        void copy(char c);
+    void copy(char c);
 
 	Rotor(std::vector<int>& r);
-
-	Rotor* getPrevious();
-
-	void setPrevious(Rotor *r);
-
-	Rotor* getNext();
-
-	void setNext(Rotor *r);
-
 
 	std::string passRotor(std::string& s);
 

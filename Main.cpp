@@ -10,17 +10,20 @@
 #include "RotorMachine.h"
 #include "Reflector.h"
 
-using namespace std;
 
-std::string Encrypt(const std::string& msg, 
+//Main Encrypt Method
+void Encrypt(const std::string& msg,
 	                Plugboard* pboard, 
 	                   RotorMachine* rotorM) {
 
-
-	return pboard->printPlugboard(
-		rotorM->passRotorsBack(
-			Reflection(rotorM->passRotors(
-				pboard->printPlugboard(msg)))));
+	for (int i = 0; i < msg.length(); i++) {
+		std::string str(1, msg[i]);
+		std::cout << pboard->printPlugboard(
+				rotorM->passRotorsBack(
+						Reflection(rotorM->passRotors(
+								pboard->printPlugboard(str)))));
+		rotorM->Rotate();
+	}
 }
 
 int main(int argc, char **argv)
@@ -40,7 +43,7 @@ int main(int argc, char **argv)
 			pb.push_back(x);
 		}
 	} else {
-		std::cout << "File does not exist" ;
+		std::cout << "File does not exist" << std::endl ;
 	}
 
 
@@ -61,9 +64,9 @@ int main(int argc, char **argv)
   RotorMachine *rotorM
        = new RotorMachine(noOfRotors, vecOfRotors);
     std::string msg;
-    cin >> msg;
-	std::string soln = Encrypt(msg, pboard, rotorM);
-    cout << soln << endl;
+    std::cin >> msg;
+    Encrypt(msg, pboard, rotorM);
+    std::cout << std::endl;
   
 
   return 0;

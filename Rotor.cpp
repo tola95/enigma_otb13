@@ -12,22 +12,6 @@
 	 setDisplacement(0);
  }
 
-Rotor* Rotor::getPrevious() {
-     return previous;
- }
-
- void Rotor::setPrevious(Rotor *r) {
-     previous = r;
- }
-
- Rotor* Rotor::getNext() {
-     return next;
- }
-
- void Rotor::setNext(Rotor *r) {
-     next = r;
- }
-
  //Initialise Rotor mapping
  void Rotor::initMap(){
 	 for(int i=0; i<26; i++) {
@@ -57,10 +41,6 @@ Rotor* Rotor::getPrevious() {
     		 newc = (newc % 26);
     	 }
     	 int value = (((p.at((newc + 'A')) - getDisplacement() ) + 26) % 26) + 'A';
-    	 //if (value < 65) {
-    	 //	 value = 90 - ('A' - value) ;
-    	 //}
-    	 std::cout << value << std::endl;
     	 copy[i] = value;
      }
 
@@ -74,8 +54,6 @@ Rotor* Rotor::getPrevious() {
 	 std::string copy;
 	 copy.resize(s.length());
 	 for(int i=0; i<s.length(); i++) {
-		 //std::cout << s[i] << std::endl;
-		 //printf("Gives\n");
 
     	 int newc = (s[i] + getDisplacement()) - 'A';
     	 if (newc >= 26) {
@@ -85,7 +63,6 @@ Rotor* Rotor::getPrevious() {
     	 value = ((value + 26) % (26)) + 'A';
     	 copy[i] = value ;
 
-    	 std::cout << copy[i] << std::endl;
 	 }
 
 	 return copy;
