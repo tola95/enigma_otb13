@@ -12,19 +12,18 @@
 
 
 //Main Encrypt Method
-void Encrypt(const std::string& msg,
+void Encrypt(char c,
 	                Plugboard* pboard, 
 	                   RotorMachine* rotorM) {
 
-	for (int i = 0; i < msg.length(); i++) {
-		std::string str(1, msg[i]);
-		std::cout << pboard->printPlugboard(
-				rotorM->passRotorsBack(
-						Reflection(rotorM->passRotors(
-								pboard->printPlugboard(str)))));
+		std::string str(1, c);
+		    std::cout << pboard->printPlugboard(
+				    rotorM->passRotorsBack(
+					    	Reflection(rotorM->passRotors(
+					    			pboard->printPlugboard(str)))));
 		rotorM->Rotate();
-	}
 }
+
 
 int main(int argc, char **argv)
 { 
@@ -63,9 +62,10 @@ int main(int argc, char **argv)
   Plugboard *pboard = new Plugboard(pb);
   RotorMachine *rotorM
        = new RotorMachine(noOfRotors, vecOfRotors);
-    std::string msg;
-    std::cin >> msg;
-    Encrypt(msg, pboard, rotorM);
+    char msg;
+    while (std::cin >> msg >> std::ws) {
+        Encrypt(msg, pboard, rotorM);
+    }
     std::cout << std::endl;
   
 
